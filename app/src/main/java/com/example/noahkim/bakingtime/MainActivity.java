@@ -5,13 +5,13 @@ import android.os.Bundle;
 
 import timber.log.Timber;
 
-public class RecipesActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private final String RECIPEFRAGMENT_TAG = "RFTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recipes_main);
+        setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

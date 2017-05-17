@@ -1,5 +1,6 @@
 package com.example.noahkim.bakingtime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.noahkim.bakingtime.adapters.RecipesAdapter;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.webservice.Api;
 
@@ -31,6 +33,7 @@ public class RecipesFragment extends Fragment {
     RecyclerView mRecyclerView;
     private RecipesAdapter mRecipesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    public static final String RECIPE_DETAILS = "recipe_details";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,4 +79,5 @@ public class RecipesFragment extends Fragment {
             }
         });
     }
+
 }

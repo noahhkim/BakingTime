@@ -1,22 +1,28 @@
-package com.example.noahkim.bakingtime;
+package com.example.noahkim.bakingtime.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.RecipeDetailActivity;
 import com.example.noahkim.bakingtime.model.Recipe;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * RecipesAdapter is backed by a list of {@link Recipe} objects which populate
- * the RecyclerView in RecipesActivity
+ * the RecyclerView in MainActivity
  */
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
+    public static final String RECIPE_DETAILS = "recipe_details";
     private Context mContext;
     private List<Recipe> mRecipes;
 
@@ -34,9 +40,18 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
 
     // Create a new TextView for each item referenced by the Adapter
     @Override
-    public void onBindViewHolder(RecipeItemViewHolder holder, int position) {
-        Recipe currentRecipe = mRecipes.get(position);
+    public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
+        final Recipe currentRecipe = mRecipes.get(position);
         holder.mTextView.setText(currentRecipe.getRecipeName());
+        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+                intent.putExtra(RECIPE_DETAILS, currentRecipe);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
