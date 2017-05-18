@@ -23,27 +23,26 @@ public class Recipe implements Parcelable {
     @SerializedName("ingredients")
     private List<Ingredient> mRecipeIngredients;
 
+    @SerializedName("steps")
+    private List<Step> mRecipeSteps;
+
     @SerializedName("servings")
     private int mRecipeServings;
 
-    public Recipe(String recipeName, int recipeId, List<Ingredient> recipeIngredients, int recipeServings) {
+    public Recipe(String recipeName, int recipeId, List<Ingredient> recipeIngredients, List<Step> recipeSteps, int recipeServings) {
 
         mRecipeName = recipeName;
         mRecipeId = recipeId;
         mRecipeIngredients = recipeIngredients;
+        mRecipeSteps = recipeSteps;
         mRecipeServings = recipeServings;
     }
-
-//    public Recipe(String recipeName) {
-//
-//        mRecipeName = recipeName;
-//    }
-
 
     protected Recipe(Parcel in) {
         mRecipeName = in.readString();
         mRecipeId = in.readInt();
         mRecipeIngredients = in.createTypedArrayList(Ingredient.CREATOR);
+        mRecipeSteps = in.createTypedArrayList(Step.CREATOR);
         mRecipeServings = in.readInt();
     }
 
@@ -69,6 +68,7 @@ public class Recipe implements Parcelable {
         parcel.writeString(mRecipeName);
         parcel.writeInt(mRecipeId);
         parcel.writeTypedList(mRecipeIngredients);
+        parcel.writeTypedList(mRecipeSteps);
         parcel.writeInt(mRecipeServings);
     }
 
@@ -78,5 +78,9 @@ public class Recipe implements Parcelable {
 
     public List<Ingredient> getRecipeIngredients() {
         return mRecipeIngredients;
+    }
+
+    public List<Step> getRecipeSteps() {
+        return mRecipeSteps;
     }
 }

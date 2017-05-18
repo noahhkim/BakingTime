@@ -26,8 +26,11 @@ import butterknife.ButterKnife;
  */
 
 public class RecipeDetailsFragment extends Fragment {
-    @BindView(R.id.recyclerview_ingredients)
+    @BindView(R.id.recyclerview_ingredients_list)
     RecyclerView mIngredientsRecyclerView;
+    @BindView(R.id.recyclerview_steps_list)
+    RecyclerView mStepsRecyclerView;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private Recipe mRecipe;
     private IngredientsAdapter mIngredientsAdapter;
@@ -50,6 +53,10 @@ public class RecipeDetailsFragment extends Fragment {
         mIngredientsRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mIngredientsRecyclerView.setLayoutManager(mLayoutManager);
+
+        mStepsRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mStepsRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     private void getIngredients() {
