@@ -1,4 +1,4 @@
-package com.example.noahkim.bakingtime;
+package com.example.noahkim.bakingtime.ui;
 
 import android.support.v7.app.AppCompatActivity;
 

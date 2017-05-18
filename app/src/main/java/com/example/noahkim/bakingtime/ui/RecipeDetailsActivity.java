@@ -1,9 +1,10 @@
-package com.example.noahkim.bakingtime;
+package com.example.noahkim.bakingtime.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
 
 import butterknife.ButterKnife;

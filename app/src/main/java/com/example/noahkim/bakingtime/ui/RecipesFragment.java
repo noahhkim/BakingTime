@@ -1,4 +1,4 @@
-package com.example.noahkim.bakingtime;
+package com.example.noahkim.bakingtime.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.adapters.RecipesAdapter;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.webservice.Api;
@@ -29,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipesFragment extends Fragment {
     @BindView(R.id.recyclerview_recipes)
-    RecyclerView mRecyclerView;
+    RecyclerView mRecipesRecyclerView;
     private RecipesAdapter mRecipesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -39,14 +40,13 @@ public class RecipesFragment extends Fragment {
         // Bind the views
         ButterKnife.bind(this, rootView);
 
-
         initRecyclerView();
         getRecipes();
         return rootView;
     }
 
     private void initRecyclerView() {
-        mRecyclerView.setHasFixedSize(true);
+        mRecipesRecyclerView.setHasFixedSize(true);
 
         if (getResources().getBoolean(R.bool.isTablet)) {
             mLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -54,7 +54,7 @@ public class RecipesFragment extends Fragment {
             mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         }
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecipesRecyclerView.setLayoutManager(mLayoutManager);
     }
 
     private void getRecipes() {
@@ -68,7 +68,7 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                     mRecipesAdapter = new RecipesAdapter(getContext(), response.body());
-                    mRecyclerView.setAdapter(mRecipesAdapter);
+                    mRecipesRecyclerView.setAdapter(mRecipesAdapter);
             }
 
             @Override

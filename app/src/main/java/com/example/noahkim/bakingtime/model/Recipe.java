@@ -75,4 +75,8 @@ public class Recipe implements Parcelable {
     public String getRecipeName() {
         return mRecipeName;
     }
+
+    public List<Ingredient> getRecipeIngredients() {
+        return mRecipeIngredients;
+    }
 }

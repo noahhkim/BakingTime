@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
 import com.example.noahkim.bakingtime.model.Recipe;
 
 import java.util.List;
