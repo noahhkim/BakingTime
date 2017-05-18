@@ -1,6 +1,5 @@
 package com.example.noahkim.bakingtime;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,11 +32,10 @@ public class RecipesFragment extends Fragment {
     RecyclerView mRecyclerView;
     private RecipesAdapter mRecipesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public static final String RECIPE_DETAILS = "recipe_details";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.recipes_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recipes, container, false);
         // Bind the views
         ButterKnife.bind(this, rootView);
 
@@ -51,7 +49,7 @@ public class RecipesFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
         if (getResources().getBoolean(R.bool.isTablet)) {
-            mLayoutManager = new GridLayoutManager(getActivity(), 3);
+            mLayoutManager = new GridLayoutManager(getActivity(), 2);
         } else {
             mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         }

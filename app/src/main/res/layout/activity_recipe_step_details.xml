@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.noahkim.bakingtime.RecipeStepDetailActivity">
+
+    <!-- LinearLayout for holding media player and recipe step instructions -->
+    <LinearLayout
+        android:id="@+id/recipe_step_detail_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+
+        <!-- Two containers for Media Player and recipe step instruction -->
+
+        <!-- This container holds the MediaPlayer -->
+        <FrameLayout android:id="@+id/media_player_container"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"/>
+
+        <!-- This container holds the recipe step instruction -->
+        <FrameLayout android:id="@+id/recipe_step_instruction_container"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.RecipeDetailActivity;
+import com.example.noahkim.bakingtime.RecipeDetailsActivity;
 import com.example.noahkim.bakingtime.model.Recipe;
 
 import java.util.List;
 
-import timber.log.Timber;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * RecipesAdapter is backed by a list of {@link Recipe} objects which populate
@@ -42,11 +43,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
         final Recipe currentRecipe = mRecipes.get(position);
-        holder.mTextView.setText(currentRecipe.getRecipeName());
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
+        holder.mRecipeNameView.setText(currentRecipe.getRecipeName());
+        holder.mRecipeNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+                Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
                 intent.putExtra(RECIPE_DETAILS, currentRecipe);
                 mContext.startActivity(intent);
             }
@@ -61,11 +62,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     }
 
     public class RecipeItemViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mTextView;
+        @BindView(R.id.recipe_card)
+        TextView mRecipeNameView;
 
         public RecipeItemViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.recipe_card);
+            ButterKnife.bind(this, itemView);
         }
     }
 
