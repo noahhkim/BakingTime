@@ -2,7 +2,6 @@ package com.example.noahkim.bakingtime.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,17 +42,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     // Create a new TextView for each item referenced by the Adapter
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
-        final Recipe currentRecipe = mRecipes.get(position);
+        Recipe currentRecipe = mRecipes.get(position);
         holder.mRecipeNameView.setText(currentRecipe.getRecipeName());
-        holder.mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
-                intent.putExtra(RECIPE_DETAILS, currentRecipe);
-                mContext.startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -62,9 +52,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         return mRecipes.size();
     }
 
-    public class RecipeItemViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.card_view)
-        CardView mCardView;
+    public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.recipe_card)
         TextView mRecipeNameView;
 
@@ -72,6 +60,17 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         public RecipeItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                Recipe currentRecipe = mRecipes.get(getAdapterPosition());
+                Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
+                intent.putExtra(RECIPE_DETAILS, currentRecipe);
+                mContext.startActivity(intent);
+            }
         }
     }
 
