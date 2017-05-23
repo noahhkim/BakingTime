@@ -8,7 +8,6 @@ import com.example.noahkim.bakingtime.R;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    private final String RECIPEFRAGMENT_TAG = "RFTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.recipe_list_frame, new RecipesFragment(), RECIPEFRAGMENT_TAG)
+                    .add(R.id.recipe_list_frame, new RecipesFragment())
                     .commit();
 
             // Set up timber

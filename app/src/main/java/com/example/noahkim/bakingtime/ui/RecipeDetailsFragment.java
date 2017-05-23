@@ -1,5 +1,6 @@
 package com.example.noahkim.bakingtime.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by Noah on 5/17/2017.
  */
 
-public class RecipeDetailsFragment extends Fragment {
+public class RecipeDetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener{
     @BindView(R.id.recyclerview_ingredients_list)
     RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.recyclerview_steps_list)
@@ -74,7 +75,14 @@ public class RecipeDetailsFragment extends Fragment {
 
         // attach steps to recyclerview
         mSteps = mRecipe.getRecipeSteps();
-        mStepsAdapter = new StepsAdapter(getContext(), mSteps);
+        mStepsAdapter = new StepsAdapter(this, mSteps);
         mStepsRecyclerView.setAdapter(mStepsAdapter);
+    }
+
+    @Override
+    public void onItemClick(int clickedItem) {
+        Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
+        intent.putExtra(StepsAdapter.STEP_DETAILS, clickedItem);
+        startActivity(intent);
     }
 }
