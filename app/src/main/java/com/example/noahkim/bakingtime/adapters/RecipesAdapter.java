@@ -45,7 +45,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
         final Recipe currentRecipe = mRecipes.get(position);
         holder.mRecipeNameView.setText(currentRecipe.getRecipeName());
-        holder.mRecipeNameView.setOnClickListener(new View.OnClickListener() {
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
