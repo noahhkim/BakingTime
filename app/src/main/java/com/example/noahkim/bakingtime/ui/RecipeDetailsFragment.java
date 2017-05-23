@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.adapters.IngredientsAdapter;
 import com.example.noahkim.bakingtime.adapters.RecipesAdapter;
+import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
+import com.example.noahkim.bakingtime.model.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,9 @@ public class RecipeDetailsFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private Recipe mRecipe;
     private IngredientsAdapter mIngredientsAdapter;
+    private StepsAdapter mStepsAdapter;
     private List<Ingredient> mIngredients = new ArrayList<>();
+    private List<Step> mSteps = new ArrayList<>();
 
     @Nullable
     @Override
@@ -44,7 +48,7 @@ public class RecipeDetailsFragment extends Fragment {
 
         initRecyclerView();
 
-        getIngredients();
+        getDetails();
 
         return rootView;
     }
@@ -59,10 +63,18 @@ public class RecipeDetailsFragment extends Fragment {
         mStepsRecyclerView.setLayoutManager(mLayoutManager);
     }
 
-    private void getIngredients() {
+    private void getDetails() {
+        // retrieve data
         mRecipe = getActivity().getIntent().getExtras().getParcelable(RecipesAdapter.RECIPE_DETAILS);
+
+        // attach ingredients adapter to recyclerview
         mIngredients = mRecipe.getRecipeIngredients();
         mIngredientsAdapter = new IngredientsAdapter(getContext(), mIngredients);
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
+
+        // attach steps to recyclerview
+        mSteps = mRecipe.getRecipeSteps();
+        mStepsAdapter = new StepsAdapter(getContext(), mSteps);
+        mStepsRecyclerView.setAdapter(mStepsAdapter);
     }
 }

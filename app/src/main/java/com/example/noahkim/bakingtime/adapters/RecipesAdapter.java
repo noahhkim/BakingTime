@@ -2,6 +2,7 @@ package com.example.noahkim.bakingtime.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
 import com.example.noahkim.bakingtime.model.Recipe;
+import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
 
 import java.util.List;
 
@@ -62,8 +63,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     }
 
     public class RecipeItemViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.card_view)
+        CardView mCardView;
         @BindView(R.id.recipe_card)
         TextView mRecipeNameView;
+
 
         public RecipeItemViewHolder(View itemView) {
             super(itemView);

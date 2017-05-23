@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by noahkim on 5/10/17.
  */
@@ -21,8 +19,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
-
-        ButterKnife.bind(this);
 
         // Inflate RecipeDetailsFragment
         if (savedInstanceState == null) {

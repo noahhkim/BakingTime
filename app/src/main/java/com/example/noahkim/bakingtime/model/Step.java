@@ -52,4 +52,20 @@ public class Step implements Parcelable {
         parcel.writeString(mStepDescription);
         parcel.writeString(mStepVideoUrl);
     }
+
+    public int getStepId() {
+        return mStepId + 1;
+    }
+
+    public String getStepShortDescription() {
+        return mStepShortDescription;
+    }
+
+    public String getStepDescription() {
+        return mStepDescription;
+    }
+
+    public String getStepVideoUrl() {
+        return mStepVideoUrl;
+    }
 }
