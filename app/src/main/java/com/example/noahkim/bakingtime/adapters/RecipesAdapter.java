@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * RecipesAdapter is backed by a list of {@link Recipe} objects which populate
@@ -70,6 +71,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
                 Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
                 intent.putExtra(RECIPE_DETAILS, currentRecipe);
                 mContext.startActivity(intent);
+                Timber.d("List item clicked");
             }
         }
     }

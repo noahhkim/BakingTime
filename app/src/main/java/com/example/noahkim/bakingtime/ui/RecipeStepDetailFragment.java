@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.model.Step;
+import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -35,10 +35,10 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.example.noahkim.bakingtime.ui.RecipeDetailsFragment.STEPS;
 
 /**
  * Created by Noah on 5/17/2017.
@@ -53,22 +53,28 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     private static MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
     private SimpleExoPlayer mExoPlayer;
-    private List<Step> mSteps = new ArrayList<>();
+    private String videoUrl;
     private static final String TAG = RecipeStepDetailFragment.class.getSimpleName();
+    public static int step_index = 0;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_step_details, container, false);
+        ButterKnife.bind(this, rootView);
 
+        // Retrieve data from intent
+        step_index = getActivity().getIntent().getExtras().getInt(StepsAdapter.STEP_DETAILS);
 
-//        // Initialize the Media Session
-//        initializeMediaSession();
-////        initializePlayer(Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/590129ad_17-frost-all-around-cake-yellow-cake/17-frost-all-around-cake-yellow-cake.mp4"));
-//        initializePlayer(Uri.parse(mSteps.get(0).getStepVideoUrl()));
+        // Initialize the Media Session
+        initializeMediaSession();
 
-        // set description text
-        mStepDescription.setText("Hello World!");
+        // Check if there is a video URL
+        videoUrl = STEPS.get(step_index).getStepVideoUrl();
+        initializePlayer(Uri.parse(videoUrl));
+
+        // Set description text
+        mStepDescription.setText(STEPS.get(step_index).getStepDescription());
 
         return rootView;
     }
@@ -78,7 +84,6 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
      * and media controller.
      */
     private void initializeMediaSession() {
-
         // Create a MediaSessionCompat.
         mMediaSession = new MediaSessionCompat(getContext(), TAG);
 
@@ -99,7 +104,6 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
                                 PlaybackStateCompat.ACTION_PLAY_PAUSE);
 
         mMediaSession.setPlaybackState(mStateBuilder.build());
-
 
         // MySessionCallback has methods that handle callbacks from a media controller.
         mMediaSession.setCallback(new MySessionCallback());
@@ -142,6 +146,26 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         mExoPlayer = null;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mExoPlayer.setPlayWhenReady(false);
+        mMediaSession.setActive(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMediaSession.setActive(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+        mMediaSession.setActive(false);
+    }
+
     // ExoPlayer Event Listeners
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {
@@ -161,16 +185,17 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     /**
      * Method that is called when the ExoPlayer state changes. Used to update the MediaSession
      * PlayBackState to keep in sync, and post the media notification.
+     *
      * @param playWhenReady true if ExoPlayer is playing, false if it's paused.
      * @param playbackState int describing the state of ExoPlayer. Can be STATE_READY, STATE_IDLE,
      *                      STATE_BUFFERING, or STATE_ENDED.
      */
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        if((playbackState == ExoPlayer.STATE_READY) && playWhenReady){
+        if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
             mStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
                     mExoPlayer.getCurrentPosition(), 1f);
-        } else if((playbackState == ExoPlayer.STATE_READY)){
+        } else if ((playbackState == ExoPlayer.STATE_READY)) {
             mStateBuilder.setState(PlaybackStateCompat.STATE_PAUSED,
                     mExoPlayer.getCurrentPosition(), 1f);
         }

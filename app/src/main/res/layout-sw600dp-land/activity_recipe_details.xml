@@ -9,8 +9,9 @@
 
 <!-- The static RecipeDetailsFragment -->
 <FrameLayout android:id="@+id/recipe_details_frame"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:padding="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android" />
 
@@ -23,8 +24,9 @@
     <!-- FrameLayout for holding MediaPlayer and recipe step instructions -->
     <FrameLayout
         android:id="@+id/steps_details_frame"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:padding="8dp" />
 
 </LinearLayout>

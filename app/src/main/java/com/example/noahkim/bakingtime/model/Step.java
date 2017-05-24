@@ -54,7 +54,7 @@ public class Step implements Parcelable {
     }
 
     public int getStepId() {
-        return mStepId + 1;
+        return mStepId;
     }
 
     public String getStepShortDescription() {

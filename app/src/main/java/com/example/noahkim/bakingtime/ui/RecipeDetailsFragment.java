@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by Noah on 5/17/2017.
  */
 
-public class RecipeDetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener{
+public class RecipeDetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener {
     @BindView(R.id.recyclerview_ingredients_list)
     RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.recyclerview_steps_list)
@@ -39,7 +39,7 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     private IngredientsAdapter mIngredientsAdapter;
     private StepsAdapter mStepsAdapter;
     private List<Ingredient> mIngredients = new ArrayList<>();
-    private List<Step> mSteps = new ArrayList<>();
+    public static List<Step> STEPS = new ArrayList<>();
 
     @Nullable
     @Override
@@ -74,15 +74,24 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
 
         // attach steps to recyclerview
-        mSteps = mRecipe.getRecipeSteps();
-        mStepsAdapter = new StepsAdapter(this, mSteps);
+        STEPS = mRecipe.getRecipeSteps();
+        mStepsAdapter = new StepsAdapter(this, STEPS);
         mStepsRecyclerView.setAdapter(mStepsAdapter);
     }
 
     @Override
     public void onItemClick(int clickedItem) {
-        Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
-        intent.putExtra(StepsAdapter.STEP_DETAILS, clickedItem);
-        startActivity(intent);
+        if (!getResources().getBoolean(R.bool.isTablet)) {
+            Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
+            intent.putExtra(StepsAdapter.STEP_DETAILS, clickedItem);
+            startActivity(intent);
+        } else {
+            RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
+            recipeStepDetailFragment.step_index = clickedItem;
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.steps_details_frame, recipeStepDetailFragment)
+                    .commit();
+        }
+
     }
 }

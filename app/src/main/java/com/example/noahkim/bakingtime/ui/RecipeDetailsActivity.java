@@ -22,9 +22,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         // Inflate RecipeDetailsFragment
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.recipe_details_frame, new RecipeDetailsFragment())
-                    .commit();
+            if (getResources().getBoolean(R.bool.isTablet)) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.recipe_details_frame, new RecipeDetailsFragment())
+                        .commit();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.steps_details_frame, new RecipeStepDetailFragment())
+                        .commit();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.recipe_details_frame, new RecipeDetailsFragment())
+                        .commit();
+            }
+
         }
 
 //        // Determine if creating a two-pane or single-pane display

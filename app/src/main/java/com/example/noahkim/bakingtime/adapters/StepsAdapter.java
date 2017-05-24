@@ -1,5 +1,6 @@
 package com.example.noahkim.bakingtime.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,12 @@ import butterknife.ButterKnife;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemViewHolder> {
     public static final String STEP_DETAILS = "step_details";
+    private Context mContext;
     private List<Step> mSteps;
     private ListItemClickListener mOnClickListener;
 
-    public StepsAdapter(ListItemClickListener listener, List<Step> steps) {
-        mOnClickListener = listener;
+    public StepsAdapter(ListItemClickListener onClickListener, List<Step> steps) {
+        mOnClickListener = onClickListener;
         mSteps = steps;
     }
 
@@ -41,7 +43,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemVie
     @Override
     public void onBindViewHolder(StepsAdapter.StepsItemViewHolder holder, int position) {
         final Step currentStep = mSteps.get(position);
-        holder.mStepsIdView.setText(String.valueOf(currentStep.getStepId()) + ". ");
+        holder.mStepsIdView.setText(String.valueOf(currentStep.getStepId()) + ".");
         holder.mStepsShortDescView.setText(currentStep.getStepShortDescription());
     }
 
