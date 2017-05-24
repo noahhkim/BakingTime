@@ -31,7 +31,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemVie
     }
 
     public interface ListItemClickListener {
-        void onItemClick(int clickedItem);
+        void onItemClick(int itemIndex);
     }
 
     @Override

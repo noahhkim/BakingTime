@@ -55,7 +55,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     private SimpleExoPlayer mExoPlayer;
     private String videoUrl;
     private static final String TAG = RecipeStepDetailFragment.class.getSimpleName();
-    public static int step_index = 0;
+    protected static int step_index = 0;
 
     @Nullable
     @Override
@@ -63,8 +63,10 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         View rootView = inflater.inflate(R.layout.fragment_recipe_step_details, container, false);
         ButterKnife.bind(this, rootView);
 
-        // Retrieve data from intent
-        step_index = getActivity().getIntent().getExtras().getInt(StepsAdapter.STEP_DETAILS);
+        if (!getResources().getBoolean(R.bool.isTablet)) {
+            // Retrieve data from intent
+            step_index = getActivity().getIntent().getExtras().getInt(StepsAdapter.STEP_DETAILS);
+        }
 
         // Initialize the Media Session
         initializeMediaSession();

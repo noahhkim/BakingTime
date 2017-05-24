@@ -37,12 +37,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
 
         }
-
-//        // Determine if creating a two-pane or single-pane display
-//        if (findViewById(R.id.recipe_step_detail_linear_layout) != null) {
-//            mTwoPane = true;
-//        } else {
-//            mTwoPane = false;
-//        }
     }
 }
+

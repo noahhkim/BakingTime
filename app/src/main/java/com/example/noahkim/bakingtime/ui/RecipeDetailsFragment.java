@@ -80,14 +80,14 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     }
 
     @Override
-    public void onItemClick(int clickedItem) {
+    public void onItemClick(int itemIndex) {
         if (!getResources().getBoolean(R.bool.isTablet)) {
             Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
-            intent.putExtra(StepsAdapter.STEP_DETAILS, clickedItem);
+            intent.putExtra(StepsAdapter.STEP_DETAILS, itemIndex);
             startActivity(intent);
         } else {
             RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
-            recipeStepDetailFragment.step_index = clickedItem;
+            recipeStepDetailFragment.step_index = itemIndex;
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.steps_details_frame, recipeStepDetailFragment)
                     .commit();
