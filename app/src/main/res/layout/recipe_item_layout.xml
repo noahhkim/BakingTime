@@ -17,6 +17,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha=".75"/>
+
         <TextView
             android:id="@+id/recipe_card"
             android:layout_width="wrap_content"
@@ -26,7 +33,9 @@
             android:adjustViewBounds="true"
             android:gravity="end"
             android:padding="8dp"
-            android:textSize="24sp"
+            android:textSize="36sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             android:focusableInTouchMode="false"/>
 
     </RelativeLayout>

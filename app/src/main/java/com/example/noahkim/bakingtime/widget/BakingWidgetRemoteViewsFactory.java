@@ -15,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
  * Created by Noah on 5/24/2017.
@@ -30,7 +31,6 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public void onCreate() {
-
     }
 
     @Override
@@ -45,7 +45,8 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        if (mRecipes == null) return 0;
+//        if (mRecipes == null) return 0;
+        Timber.d("Recipes: " + mRecipes.size());
         return mRecipes.size();
     }
 

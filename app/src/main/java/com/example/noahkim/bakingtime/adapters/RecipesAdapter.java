@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     public static final String RECIPE_DETAILS = "recipe_details";
     private Context mContext;
     private List<Recipe> mRecipes;
+    int[] myImageList;
 
     public RecipesAdapter(Context context, List<Recipe> recipes) {
         mContext = context;
@@ -43,8 +46,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     // Create a new TextView for each item referenced by the Adapter
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
+        myImageList = new int[]{R.drawable.nutella_pie,
+                R.drawable.brownies,
+                R.drawable.yellow_cake,
+                R.drawable.cheesecake};
         Recipe currentRecipe = mRecipes.get(position);
         holder.mRecipeNameView.setText(currentRecipe.getRecipeName());
+        Picasso.with(mContext)
+                .load(myImageList[position])
+                .into(holder.mRecipeImageView);
     }
 
     @Override
@@ -53,9 +63,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         return mRecipes.size();
     }
 
-    public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.recipe_card)
         TextView mRecipeNameView;
+        @BindView(R.id.recipe_image)
+        ImageView mRecipeImageView;
 
 
         public RecipeItemViewHolder(View itemView) {
