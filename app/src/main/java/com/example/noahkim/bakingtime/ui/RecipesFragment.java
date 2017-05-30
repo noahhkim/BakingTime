@@ -33,6 +33,7 @@ public class RecipesFragment extends Fragment {
     RecyclerView mRecipesRecyclerView;
     private RecipesAdapter mRecipesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private List<Recipe> mRecipes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,13 +63,14 @@ public class RecipesFragment extends Fragment {
                 .baseUrl("https://d17h27t6h515a5.cloudfront.net/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        Api recipeApi = retrofit.create(Api.class);
+        final Api recipeApi = retrofit.create(Api.class);
         Call<List<Recipe>> recipeCall = recipeApi.getRecipes();
         recipeCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                    mRecipesAdapter = new RecipesAdapter(getContext(), response.body());
-                    mRecipesRecyclerView.setAdapter(mRecipesAdapter);
+                mRecipes = response.body();
+                mRecipesAdapter = new RecipesAdapter(getContext(), mRecipes);
+                mRecipesRecyclerView.setAdapter(mRecipesAdapter);
             }
 
             @Override
