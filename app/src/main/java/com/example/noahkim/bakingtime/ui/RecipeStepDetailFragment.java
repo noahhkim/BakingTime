@@ -3,6 +3,7 @@ package com.example.noahkim.bakingtime.ui;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
@@ -38,6 +40,7 @@ import com.google.android.exoplayer2.util.Util;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.noahkim.bakingtime.R.bool.isTablet;
 import static com.example.noahkim.bakingtime.ui.RecipeDetailsFragment.STEPS;
 
 /**
@@ -49,6 +52,10 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     SimpleExoPlayerView mPlayerView;
     @BindView(R.id.recipe_step_description)
     TextView mStepDescription;
+    @BindView(R.id.prev_button)
+    Button mPrevButton;
+    @BindView(R.id.next_button)
+    Button mNextButton;
 
     private static MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
@@ -63,8 +70,8 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         View rootView = inflater.inflate(R.layout.fragment_recipe_step_details, container, false);
         ButterKnife.bind(this, rootView);
 
-        if (!getResources().getBoolean(R.bool.isTablet)) {
-            // Retrieve data from intent
+        // Retrieve data from intent
+        if (!getResources().getBoolean(isTablet)) {
             step_index = getActivity().getIntent().getExtras().getInt(StepsAdapter.STEP_DETAILS);
         }
 
@@ -78,7 +85,30 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         // Set description text
         mStepDescription.setText(STEPS.get(step_index).getStepDescription());
 
+        // Initialize NavButtons
+        initializeNavButtons();
+
+        // ExoPlayer takes up entire screen in phone landscape mode
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+                && !getResources().getBoolean(R.bool.isTablet)) {
+            hideSystemUI();
+            mPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+            mStepDescription.setVisibility(View.GONE);
+            mPrevButton.setVisibility(View.GONE);
+            mNextButton.setVisibility(View.GONE);
+        }
+
         return rootView;
+    }
+
+    private void hideSystemUI() {
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     /**
@@ -112,6 +142,39 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         // Start the Media Session since the activity is active.
         mMediaSession.setActive(true);
+    }
+
+    /**
+     * Initialize navigation buttons
+     */
+    private void initializeNavButtons() {
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (step_index > 0) {
+                    step_index--;
+                    refreshStepDetails();
+                }
+            }
+        });
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (step_index < STEPS.size() - 1) {
+                    step_index++;
+                    refreshStepDetails();
+                }
+            }
+        });
+    }
+
+    /**
+     * Refresh step details screen based on button click position
+     */
+    private void refreshStepDetails() {
+        mStepDescription.setText(STEPS.get(step_index).getStepDescription());
+        releasePlayer();
+        initializePlayer(Uri.parse(STEPS.get(step_index).getStepVideoUrl()));
     }
 
     /**
