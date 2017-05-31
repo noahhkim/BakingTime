@@ -23,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
  * Created by Noah on 5/11/2017.
@@ -69,6 +70,7 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipes = response.body();
+                Timber.d(mRecipes.toString());
                 mRecipesAdapter = new RecipesAdapter(getContext(), mRecipes);
                 mRecipesRecyclerView.setAdapter(mRecipesAdapter);
             }

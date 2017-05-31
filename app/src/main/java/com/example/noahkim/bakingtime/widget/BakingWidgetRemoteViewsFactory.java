@@ -45,7 +45,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public int getCount() {
-//        if (mRecipes == null) return 0;
+        if (mRecipes == null) return 0;
         Timber.d("Recipes: " + mRecipes.size());
         return mRecipes.size();
     }
@@ -70,12 +70,12 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     private void getRecipes() {
@@ -83,12 +83,14 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
                 .baseUrl("https://d17h27t6h515a5.cloudfront.net/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         Api recipeApi = retrofit.create(Api.class);
         Call<List<Recipe>> recipeCall = recipeApi.getRecipes();
         recipeCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipes = response.body();
+                Timber.d(mRecipes.toString());
             }
 
             @Override

@@ -43,7 +43,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemVie
     @Override
     public void onBindViewHolder(StepsAdapter.StepsItemViewHolder holder, int position) {
         final Step currentStep = mSteps.get(position);
-        holder.mStepsIdView.setText(String.valueOf(currentStep.getStepId()) + ".");
+//        holder.mStepsIdView.setText(String.valueOf(currentStep.getStepId()) + ".");
         holder.mStepsShortDescView.setText(currentStep.getStepShortDescription());
     }
 
@@ -54,8 +54,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemVie
     }
 
     public class StepsItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.steps_id)
-        TextView mStepsIdView;
+//        @BindView(R.id.steps_id)
+//        TextView mStepsIdView;
         @BindView(R.id.steps_short_description)
         TextView mStepsShortDescView;
 
