@@ -9,6 +9,7 @@ import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.webservice.Api;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,10 +25,12 @@ import timber.log.Timber;
 public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
     private Context mContext;
     private List<Recipe> mRecipes;
+    private CountDownLatch doneSignal = new CountDownLatch(1);
 
     public BakingWidgetRemoteViewsFactory(Context context) {
         mContext = context;
     }
+
 
     @Override
     public void onCreate() {
@@ -35,7 +38,14 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
-        getRecipes();
+        try {
+            getRecipes();
+            doneSignal.await();
+            doneSignal.countDown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -45,8 +55,9 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public int getCount() {
-        if (mRecipes == null) return 0;
-        Timber.d("Recipes: " + mRecipes.size());
+//        if (mRecipes == null) return 0;
+        Timber.d("Recipe count: " + mRecipes.size());
+
         return mRecipes.size();
     }
 
@@ -55,6 +66,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
         remoteViews.setTextViewText(R.id.recipe_name, mRecipes.get(i).getRecipeName());
+
         return remoteViews;
     }
 
@@ -65,7 +77,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -90,7 +102,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipes = response.body();
-                Timber.d(mRecipes.toString());
+                Timber.d("Recipes received: " + mRecipes.size());
             }
 
             @Override
@@ -99,4 +111,6 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
             }
         });
     }
+
 }
+

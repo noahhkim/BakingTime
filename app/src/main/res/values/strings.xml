@@ -12,4 +12,7 @@
     <!--Titles for fragment_recipe_details-->
     <string name="details_ingredients">Ingredients</string>
     <string name="details_steps">Steps</string>
+
+    <string name="URL">https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58d1537b_baking/baking.json</string>
+
 </resources>

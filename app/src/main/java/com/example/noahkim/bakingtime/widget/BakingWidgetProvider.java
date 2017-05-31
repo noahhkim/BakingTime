@@ -1,18 +1,18 @@
 package com.example.noahkim.bakingtime.widget;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.ui.MainActivity;
 import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
-
-import timber.log.Timber;
 
 /**
  * Created by Noah on 5/24/2017.
@@ -20,6 +20,7 @@ import timber.log.Timber;
 
 public class BakingWidgetProvider extends AppWidgetProvider {
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         // Construct the RemoteViews object
@@ -74,8 +75,6 @@ public class BakingWidgetProvider extends AppWidgetProvider {
             ComponentName cn = new ComponentName(context, BakingWidgetProvider.class);
             mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.widget_recipe_list);
         }
-
-        Timber.d("action recieved: " + action);
         super.onReceive(context, intent);
     }
 }
