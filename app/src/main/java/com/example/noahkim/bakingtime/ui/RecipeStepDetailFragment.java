@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -72,7 +71,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         // Retrieve data from intent
         if (!getResources().getBoolean(isTablet)) {
-            step_index = getActivity().getIntent().getExtras().getInt(StepsAdapter.STEP_DETAILS);
+            step_index = getActivity().getIntent().getExtras().getInt(RecipeDetailsActivity.STEP_DETAILS);
         }
 
         // Initialize the Media Session

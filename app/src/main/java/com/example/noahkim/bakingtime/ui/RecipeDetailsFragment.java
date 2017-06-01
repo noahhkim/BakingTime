@@ -47,9 +47,9 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         View rootView = inflater.inflate(R.layout.fragment_recipe_details, container, false);
         ButterKnife.bind(this, rootView);
 
-        initRecyclerView();
-
         getDetails();
+
+        initRecyclerView();
 
         return rootView;
     }
@@ -65,8 +65,8 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     }
 
     private void getDetails() {
-        // retrieve data
-        mRecipe = getActivity().getIntent().getExtras().getParcelable(RecipesAdapter.RECIPE_DETAILS);
+        // retrieve data from intent
+        mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
 
         // attach ingredients adapter to recyclerview
         mIngredients = mRecipe.getRecipeIngredients();
@@ -83,7 +83,7 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     public void onItemClick(int itemIndex) {
         if (!getResources().getBoolean(R.bool.isTablet)) {
             Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
-            intent.putExtra(StepsAdapter.STEP_DETAILS, itemIndex);
+            intent.putExtra(RecipeDetailsActivity.STEP_DETAILS, itemIndex);
             startActivity(intent);
         } else {
             RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();

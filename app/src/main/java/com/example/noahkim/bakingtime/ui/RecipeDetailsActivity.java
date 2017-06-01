@@ -5,15 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.model.Recipe;
 
 /**
  * Created by noahkim on 5/10/17.
  */
 
 public class RecipeDetailsActivity extends AppCompatActivity {
-    private Recipe mRecipe;
-    private boolean mTwoPane;
+    public static final String STEP_DETAILS = "com.example.noahkim.bakingtime.extra.STEP_DETAILS";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

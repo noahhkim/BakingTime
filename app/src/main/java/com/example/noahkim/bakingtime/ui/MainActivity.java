@@ -8,6 +8,7 @@ import com.example.noahkim.bakingtime.R;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String RECIPE_DETAILS = "recipe_details";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

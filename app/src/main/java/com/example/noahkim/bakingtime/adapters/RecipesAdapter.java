@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
+import com.example.noahkim.bakingtime.ui.MainActivity;
 import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +27,6 @@ import timber.log.Timber;
  */
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
-    public static final String RECIPE_DETAILS = "recipe_details";
     private Context mContext;
     private List<Recipe> mRecipes;
     int[] myImageList;
@@ -81,7 +81,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 Recipe currentRecipe = mRecipes.get(getAdapterPosition());
                 Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
-                intent.putExtra(RECIPE_DETAILS, currentRecipe);
+                intent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);
                 mContext.startActivity(intent);
                 Timber.d("List item clicked");
             }

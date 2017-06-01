@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -29,13 +32,13 @@ public class Recipe implements Parcelable {
     @SerializedName("servings")
     private int mRecipeServings;
 
-//    public Recipe(JSONObject bakeJson) {
-//        try {
-//            mRecipeName = bakeJson.getString("name");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public Recipe(JSONObject bakeJSON) {
+        try {
+            mRecipeName = bakeJSON.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     protected Recipe(Parcel in) {
         mRecipeName = in.readString();

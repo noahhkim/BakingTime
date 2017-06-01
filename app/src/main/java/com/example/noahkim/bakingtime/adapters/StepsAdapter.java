@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
  */
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemViewHolder> {
-    public static final String STEP_DETAILS = "step_details";
     private Context mContext;
     private List<Step> mSteps;
     private ListItemClickListener mOnClickListener;
