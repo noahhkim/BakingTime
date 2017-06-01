@@ -9,7 +9,6 @@ import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.webservice.Api;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +24,6 @@ import timber.log.Timber;
 public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
     private Context mContext;
     private List<Recipe> mRecipes;
-    private CountDownLatch doneSignal = new CountDownLatch(1);
 
     public BakingWidgetRemoteViewsFactory(Context context) {
         mContext = context;
@@ -38,14 +36,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
-        try {
-            getRecipes();
-            doneSignal.await();
-            doneSignal.countDown();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        getRecipes();
     }
 
     @Override
@@ -110,6 +101,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
                 t.printStackTrace();
             }
         });
+
     }
 
 }

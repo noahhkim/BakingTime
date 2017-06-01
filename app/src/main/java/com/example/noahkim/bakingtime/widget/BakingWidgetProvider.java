@@ -69,7 +69,7 @@ public class BakingWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final String action = intent.getAction();
+        String action = intent.getAction();
         if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             AppWidgetManager mgr = AppWidgetManager.getInstance(context);
             ComponentName cn = new ComponentName(context, BakingWidgetProvider.class);
@@ -77,4 +77,6 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         }
         super.onReceive(context, intent);
     }
+
+
 }
