@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
@@ -102,82 +100,5 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         return true;
     }
 
-    private void getRecipes() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://d17h27t6h515a5.cloudfront.net/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Api recipeApi = retrofit.create(Api.class);
-        Call<List<Recipe>> recipeCall = recipeApi.getRecipes();
-        recipeCall.enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                mRecipes = response.body();
-                Timber.d("Recipes received: " + mRecipes.size());
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-//    public class FetchRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
-//
-//        @Override
-//        protected List<Recipe> doInBackground(Void... params) {
-//
-//            HttpURLConnection urlConnection = null;
-//            BufferedReader reader = null;
-//
-//            try {
-//                Uri builtUri = Uri.parse(mContext.getString(R.string.URL))
-//                        .buildUpon()
-//                        .build();
-//
-//                URL url = new URL(builtUri.toString());
-//
-//                urlConnection = (HttpURLConnection) url.openConnection();
-//                urlConnection.setRequestMethod("GET");
-//                urlConnection.connect();
-//
-//                InputStream inputStream = urlConnection.getInputStream();
-//                StringBuffer buffer = new StringBuffer();
-//                if (inputStream == null) {
-//                    return null;
-//                }
-//                reader = new BufferedReader(new InputStreamReader(inputStream));
-//
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    buffer.append(line + "\n");
-//                }
-//                if (buffer.length() == 0) {
-//                    return null;
-//                }
-//                JSONArray recipesArray = new JSONArray(buffer.toString());
-//                mRecipes = new ArrayList<>();
-//                for (int i = 0; i < recipesArray.length(); i++) {
-//                    mRecipes.add(new Recipe(recipesArray.getJSONObject(i)));
-//                    Timber.d("Name: " + mRecipes.get(i).getRecipeName());
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                try {
-//                    if (urlConnection != null) {
-//                        urlConnection.disconnect();
-//                    }
-//                    if (reader != null) {
-//                        reader.close();
-//                    }
-//                } catch (Exception e) {
-//                }
-//                return mRecipes;
-//            }
-//        }
-//    }
 }
 

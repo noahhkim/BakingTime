@@ -29,14 +29,6 @@ public class Recipe implements Parcelable {
     @SerializedName("servings")
     private int mRecipeServings;
 
-//    public Recipe(JSONObject bakeJSON) {
-//        try {
-//            mRecipeName = bakeJSON.getString("name");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     protected Recipe(Parcel in) {
         mRecipeName = in.readString();
         mRecipeId = in.readInt();
