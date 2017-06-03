@@ -77,6 +77,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         // Fill in the onClick PendingIntent Template using the specific name for each recipe individually
         Intent fillInIntent = new Intent();
         fillInIntent.putExtra(MainActivity.RECIPE_DETAILS, i);
+        Timber.d("recipes ready for intent: " + mRecipes.size());
         remoteViews.setOnClickFillInIntent(R.id.background, fillInIntent);
         return remoteViews;
     }
