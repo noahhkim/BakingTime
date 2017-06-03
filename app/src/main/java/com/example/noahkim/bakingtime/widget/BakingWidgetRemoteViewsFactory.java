@@ -113,8 +113,8 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 //        recipeCall.enqueue(new Callback<List<Recipe>>() {
 //            @Override
 //            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-//                mRecipes = response.body();
-//                Timber.d("Recipes received: " + mRecipes.size());
+//                RECIPE_LIST = response.body();
+//                Timber.d("Recipes received: " + RECIPE_LIST.size());
 //            }
 //
 //            @Override

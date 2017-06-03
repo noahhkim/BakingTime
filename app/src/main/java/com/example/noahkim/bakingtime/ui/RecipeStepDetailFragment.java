@@ -40,7 +40,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.noahkim.bakingtime.R.bool.isTablet;
-import static com.example.noahkim.bakingtime.ui.RecipeDetailsFragment.STEPS;
+import static com.example.noahkim.bakingtime.ui.RecipeDetailsFragment.STEPS_LIST;
 
 /**
  * Created by Noah on 5/17/2017.
@@ -78,11 +78,11 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         initializeMediaSession();
 
         // Check if there is a video URL
-        videoUrl = STEPS.get(step_index).getStepVideoUrl();
+        videoUrl = STEPS_LIST.get(step_index).getStepVideoUrl();
         initializePlayer(Uri.parse(videoUrl));
 
         // Set description text
-        mStepDescription.setText(STEPS.get(step_index).getStepDescription());
+        mStepDescription.setText(STEPS_LIST.get(step_index).getStepDescription());
 
         // Initialize NavButtons
         initializeNavButtons();
@@ -159,7 +159,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (step_index < STEPS.size() - 1) {
+                if (step_index < STEPS_LIST.size() - 1) {
                     step_index++;
                     refreshStepDetails();
                 }
@@ -171,9 +171,9 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
      * Refresh step details screen based on button click position
      */
     private void refreshStepDetails() {
-        mStepDescription.setText(STEPS.get(step_index).getStepDescription());
+        mStepDescription.setText(STEPS_LIST.get(step_index).getStepDescription());
         releasePlayer();
-        initializePlayer(Uri.parse(STEPS.get(step_index).getStepVideoUrl()));
+        initializePlayer(Uri.parse(STEPS_LIST.get(step_index).getStepVideoUrl()));
     }
 
     /**
