@@ -17,6 +17,7 @@ import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.adapters.IngredientsAdapter;
 import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
+import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.model.Step;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     private RecyclerView.LayoutManager mLayoutManager;
     private IngredientsAdapter mIngredientsAdapter;
     private StepsAdapter mStepsAdapter;
+    private Recipe mRecipe;
     private List<Ingredient> mIngredients = new ArrayList<>();
     public static List<Step> STEPS_LIST = new ArrayList<>();
     private static int details_index = 0;
@@ -51,11 +53,11 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         ButterKnife.bind(this, rootView);
 
         // retrieve data from intent
-        details_index = getActivity().getIntent().getExtras().getInt(MainActivity.RECIPE_DETAILS);
+        mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
 
         // set Toolbar text
         if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
-            mToolbar.setTitle(RecipesFragment.RECIPE_LIST.get(details_index).getRecipeName());
+            mToolbar.setTitle(mRecipe.getRecipeName());
         }
 
         // set up back arrow for RecipeDetails toolbar
@@ -85,12 +87,12 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
 
     private void getDetails() {
         // attach ingredients adapter to recyclerview
-        mIngredients = RecipesFragment.RECIPE_LIST.get(details_index).getRecipeIngredients();
+        mIngredients = mRecipe.getRecipeIngredients();
         mIngredientsAdapter = new IngredientsAdapter(getContext(), mIngredients);
         mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
 
         // attach steps to recyclerview
-        STEPS_LIST = RecipesFragment.RECIPE_LIST.get(details_index).getRecipeSteps();
+        STEPS_LIST = mRecipe.getRecipeSteps();
         mStepsAdapter = new StepsAdapter(this, STEPS_LIST);
         mStepsRecyclerView.setAdapter(mStepsAdapter);
     }

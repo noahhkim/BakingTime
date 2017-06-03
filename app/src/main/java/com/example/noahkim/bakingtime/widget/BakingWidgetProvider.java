@@ -11,14 +11,19 @@ import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.ui.MainActivity;
 import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+
+import java.util.List;
 
 /**
  * Created by Noah on 5/24/2017.
  */
 
 public class BakingWidgetProvider extends AppWidgetProvider {
+    private static List<Recipe> mRecipes;
+
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

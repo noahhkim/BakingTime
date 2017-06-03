@@ -33,7 +33,7 @@ public class RecipesFragment extends Fragment {
     RecyclerView mRecipesRecyclerView;
     private RecipesAdapter mRecipesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public static List<Recipe> RECIPE_LIST;
+    private List<Recipe> mRecipes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,8 +70,8 @@ public class RecipesFragment extends Fragment {
         recipeCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                RECIPE_LIST = response.body();
-                mRecipesAdapter = new RecipesAdapter(getContext(), RECIPE_LIST);
+                mRecipes = response.body();
+                mRecipesAdapter = new RecipesAdapter(getContext(), mRecipes);
                 mRecipesRecyclerView.setAdapter(mRecipesAdapter);
             }
 
