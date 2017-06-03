@@ -29,13 +29,11 @@ import timber.log.Timber;
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
     private Context mContext;
     private List<Recipe> mRecipes;
-    int[] myImageList;
 
     public RecipesAdapter(Context context, List<Recipe> recipes) {
         mContext = context;
         mRecipes = recipes;
     }
-
 
     @Override
     public RecipeItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,7 +44,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
     // Create a new TextView for each item referenced by the Adapter
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, final int position) {
-        myImageList = new int[]{R.drawable.nutella_pie,
+        int[] myImageList = new int[]{R.drawable.nutella_pie,
                 R.drawable.brownies,
                 R.drawable.yellow_cake,
                 R.drawable.cheesecake};

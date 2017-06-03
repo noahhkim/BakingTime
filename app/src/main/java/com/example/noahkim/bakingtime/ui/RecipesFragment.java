@@ -41,8 +41,9 @@ public class RecipesFragment extends Fragment {
         // Bind the views
         ButterKnife.bind(this, rootView);
 
-        initRecyclerView();
         getRecipes();
+
+        initRecyclerView();
         return rootView;
     }
 
@@ -56,6 +57,7 @@ public class RecipesFragment extends Fragment {
         }
 
         mRecipesRecyclerView.setLayoutManager(mLayoutManager);
+
     }
 
     private void getRecipes() {

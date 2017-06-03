@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.adapters.IngredientsAdapter;
-import com.example.noahkim.bakingtime.adapters.RecipesAdapter;
 import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
@@ -33,6 +35,8 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.recyclerview_steps_list)
     RecyclerView mStepsRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private Recipe mRecipe;
@@ -46,6 +50,22 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_details, container, false);
         ButterKnife.bind(this, rootView);
+
+        // retrieve data from intent
+        mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
+
+        // set Toolbar text
+        if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
+            mToolbar.setTitle(mRecipe.getRecipeName());
+        }
+
+        // set up back arrow for RecipeDetails toolbar
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
 
         getDetails();
 
@@ -65,9 +85,6 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     }
 
     private void getDetails() {
-        // retrieve data from intent
-        mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
-
         // attach ingredients adapter to recyclerview
         mIngredients = mRecipe.getRecipeIngredients();
         mIngredientsAdapter = new IngredientsAdapter(getContext(), mIngredients);

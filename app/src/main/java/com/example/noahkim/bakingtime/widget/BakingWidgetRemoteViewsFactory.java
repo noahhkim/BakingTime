@@ -9,7 +9,7 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.MainActivity;
 
 import org.json.JSONArray;
 
@@ -51,7 +51,9 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
     }
+
 
     @Override
     public void onDestroy() {
@@ -69,13 +71,12 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
     public RemoteViews getViewAt(int i) {
 
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
-
         String recipeName = mRecipes.get(i).getRecipeName();
         remoteViews.setTextViewText(R.id.recipe_name, recipeName);
 
         // Fill in the onClick PendingIntent Template using the specific name for each recipe individually
         Intent fillInIntent = new Intent();
-        fillInIntent.putExtra(RecipeDetailsActivity.STEP_DETAILS, i);
+        fillInIntent.putExtra(MainActivity.RECIPE_DETAILS, i);
         remoteViews.setOnClickFillInIntent(R.id.background, fillInIntent);
         return remoteViews;
     }
@@ -87,7 +88,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -100,7 +101,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         return true;
     }
 
-    //    private void getRecipes() {
+//        private void getRecipes() {
 //        Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("https://d17h27t6h515a5.cloudfront.net/")
 //                .addConverterFactory(GsonConverterFactory.create())
@@ -121,6 +122,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 //            }
 //        });
 //    }
+
     public class FetchRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
 
         @Override
