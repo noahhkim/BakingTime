@@ -22,8 +22,6 @@ import java.util.List;
  */
 
 public class BakingWidgetProvider extends AppWidgetProvider {
-    private static List<Recipe> mRecipes;
-
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
