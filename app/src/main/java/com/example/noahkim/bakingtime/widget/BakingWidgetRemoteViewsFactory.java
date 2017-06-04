@@ -6,6 +6,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
 import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.ui.MainActivity;
 import com.example.noahkim.bakingtime.webservice.Api;
@@ -16,7 +17,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import timber.log.Timber;
 
 /**
  * Created by Noah on 5/24/2017.
@@ -65,17 +65,28 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
     }
 
     @Override
-    public RemoteViews getViewAt(int i) {
+    public RemoteViews getViewAt(int position) {
+        final Recipe currentRecipe = mRecipes.get(position);
+//        final Ingredient currentIngredient = currentRecipe.getRecipeIngredients().get(position);
 
+        // Set recipe name in the widget
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
-        String recipeName = mRecipes.get(i).getRecipeName();
-        remoteViews.setTextViewText(R.id.recipe_name, recipeName);
+        String recipeName = currentRecipe.getRecipeName();
+        remoteViews.setTextViewText(R.id.widget_recipe_name, recipeName);
+
+        // Set ingredients in the widget
+        for (int i = 0; i < currentRecipe.getRecipeIngredients().size(); i++ ) {
+            Ingredient currentIngredient = currentRecipe.getRecipeIngredients().get(i);
+            RemoteViews ingRemoteViews = new RemoteViews(mContext.getPackageName(), R.layout.ingredient_item_layout);
+            ingRemoteViews.setTextViewText(R.id.ingredient_name, currentIngredient.getIngredientName());
+            ingRemoteViews.setTextViewText(R.id.ingredient_measure, currentIngredient.getIngredientMeasure());
+            ingRemoteViews.setTextViewText(R.id.ingredient_quantity, currentIngredient.getIngredientQuantity().toString());
+            remoteViews.addView(R.id.widget_ingredients_list, ingRemoteViews);
+        }
 
         // Fill in the onClick PendingIntent Template using the specific name for each recipe individually
         Intent fillInIntent = new Intent();
-        Recipe currentRecipe = mRecipes.get(i);
         fillInIntent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);
-        Timber.d("recipes for intent: " + mRecipes.get(i).getRecipeName());
         remoteViews.setOnClickFillInIntent(R.id.background, fillInIntent);
         return remoteViews;
     }

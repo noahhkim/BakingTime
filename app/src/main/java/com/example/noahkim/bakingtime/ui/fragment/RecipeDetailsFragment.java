@@ -1,4 +1,4 @@
-package com.example.noahkim.bakingtime.ui;
+package com.example.noahkim.bakingtime.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.model.Step;
+import com.example.noahkim.bakingtime.ui.MainActivity;
+import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.RecipeStepDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +54,25 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         View rootView = inflater.inflate(R.layout.fragment_recipe_details, container, false);
         ButterKnife.bind(this, rootView);
 
-        // retrieve data from intent
-        mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
+        mRecipe = null;
+        if (getActivity().getIntent().getExtras() != null) {
+            // Retrieve data from intent
+            mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
+            // set Toolbar text
+            if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
+                mToolbar.setTitle(mRecipe.getRecipeName());
+            }
+            // Get ingredients and steps and attach them to adapter
+            getDetails();
 
-        // set Toolbar text
-        if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
-            mToolbar.setTitle(mRecipe.getRecipeName());
+            // Initialize RecyclerView
+            initRecyclerView();
         }
+
+//        // set Toolbar text
+//        if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
+//            mToolbar.setTitle(mRecipe.getRecipeName());
+//        }
 
         // set up back arrow for RecipeDetails toolbar
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -66,10 +81,10 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-
-        getDetails();
-
-        initRecyclerView();
+//
+//        getDetails();
+//
+//        initRecyclerView();
 
         return rootView;
     }
@@ -98,13 +113,15 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
 
     @Override
     public void onItemClick(int itemIndex) {
+
         if (!getResources().getBoolean(R.bool.isTablet)) {
             Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
             intent.putExtra(RecipeDetailsActivity.STEP_DETAILS, itemIndex);
             startActivity(intent);
+
         } else {
             RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
-            recipeStepDetailFragment.step_index = itemIndex;
+//            recipeStepDetailFragment.step_index = itemIndex;
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.steps_details_frame, recipeStepDetailFragment)
                     .commit();

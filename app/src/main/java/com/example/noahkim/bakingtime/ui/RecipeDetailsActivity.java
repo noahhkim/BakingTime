@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.ui.fragment.RecipeDetailsFragment;
+import com.example.noahkim.bakingtime.ui.fragment.RecipeStepDetailFragment;
 
 /**
  * Created by noahkim on 5/10/17.

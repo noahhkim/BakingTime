@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.ui.fragment.RecipesFragment;
 
 import timber.log.Timber;
 

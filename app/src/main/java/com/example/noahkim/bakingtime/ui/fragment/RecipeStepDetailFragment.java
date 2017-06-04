@@ -1,4 +1,4 @@
-package com.example.noahkim.bakingtime.ui;
+package com.example.noahkim.bakingtime.ui.fragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
+import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -40,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.noahkim.bakingtime.R.bool.isTablet;
-import static com.example.noahkim.bakingtime.ui.RecipeDetailsFragment.STEPS_LIST;
+import static com.example.noahkim.bakingtime.ui.fragment.RecipeDetailsFragment.STEPS_LIST;
 
 /**
  * Created by Noah on 5/17/2017.
@@ -99,6 +100,8 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         return rootView;
     }
+
+
 
     private void hideSystemUI() {
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
