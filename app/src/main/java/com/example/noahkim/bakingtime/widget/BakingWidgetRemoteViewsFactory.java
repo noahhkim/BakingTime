@@ -75,9 +75,10 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         remoteViews.setTextViewText(R.id.widget_recipe_name, recipeName);
 
         // Set ingredients in the widget
+        remoteViews.removeAllViews(R.id.widget_ingredients_list);
         for (int i = 0; i < currentRecipe.getRecipeIngredients().size(); i++ ) {
-            Ingredient currentIngredient = currentRecipe.getRecipeIngredients().get(i);
             RemoteViews ingRemoteViews = new RemoteViews(mContext.getPackageName(), R.layout.ingredient_item_layout);
+            Ingredient currentIngredient = currentRecipe.getRecipeIngredients().get(i);
             ingRemoteViews.setTextViewText(R.id.ingredient_name, currentIngredient.getIngredientName());
             ingRemoteViews.setTextViewText(R.id.ingredient_measure, currentIngredient.getIngredientMeasure());
             ingRemoteViews.setTextViewText(R.id.ingredient_quantity, currentIngredient.getIngredientQuantity().toString());

@@ -121,11 +121,21 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
 
         } else {
             RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
-//            recipeStepDetailFragment.step_index = itemIndex;
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.steps_details_frame, recipeStepDetailFragment)
                     .commit();
         }
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
     }
 }
