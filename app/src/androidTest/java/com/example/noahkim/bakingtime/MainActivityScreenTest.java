@@ -30,10 +30,10 @@ public class MainActivityScreenTest {
 
     @Test
     public void MainActivityTest() {
-        onView(withId(R.id.recyclerview_recipes))
+        onView(withId(R.id.recipe_list_frame))
                 .perform(actionOnItemAtPosition(1, click()));
 
-        onView(withId(R.id.recyclerview_recipes))
+        onView(withId(R.id.recipe_list_frame))
                 .check(matches(hasDescendant(withText("Brownies"))));
 
     }
