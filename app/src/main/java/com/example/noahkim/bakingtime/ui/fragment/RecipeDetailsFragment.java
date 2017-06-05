@@ -69,11 +69,6 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
             initRecyclerView();
         }
 
-//        // set Toolbar text
-//        if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
-//            mToolbar.setTitle(mRecipe.getRecipeName());
-//        }
-
         // set up back arrow for RecipeDetails toolbar
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -81,10 +76,6 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
         }
-//
-//        getDetails();
-//
-//        initRecyclerView();
 
         return rootView;
     }
@@ -127,15 +118,4 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getActivity().getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        getActivity().getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
-    }
 }
