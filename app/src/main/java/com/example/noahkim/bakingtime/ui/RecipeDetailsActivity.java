@@ -44,17 +44,5 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
-    @Override
-    protected void onPause() {
-        getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
-    }
 }
 

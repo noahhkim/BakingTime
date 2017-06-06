@@ -44,6 +44,7 @@ public class RecipesFragment extends Fragment {
         getRecipes();
 
         initRecyclerView();
+
         return rootView;
     }
 
