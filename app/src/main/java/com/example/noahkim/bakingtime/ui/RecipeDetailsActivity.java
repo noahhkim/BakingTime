@@ -47,8 +47,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        getIntent().removeExtra(MainActivity.RECIPE_DETAILS);
         super.onPause();
-        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
     }
 }
 

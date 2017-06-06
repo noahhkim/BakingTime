@@ -1,8 +1,7 @@
 package com.example.noahkim.bakingtime.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.ui.fragment.RecipesFragment;
@@ -25,11 +24,5 @@ public class MainActivity extends AppCompatActivity {
             // Set up timber
             Timber.plant(new Timber.DebugTree());
         }
-    }
-
-    @Override
-    public void onPanelClosed(int featureId, Menu menu) {
-        finish();
-        super.onPanelClosed(featureId, menu);
     }
 }

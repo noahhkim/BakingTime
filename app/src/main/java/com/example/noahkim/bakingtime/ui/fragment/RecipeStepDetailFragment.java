@@ -216,6 +216,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     @Override
     public void onPause() {
         super.onPause();
+        mExoPlayer.release();
         mExoPlayer.setPlayWhenReady(false);
         mMediaSession.setActive(false);
     }
@@ -230,6 +231,13 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     public void onDestroy() {
         super.onDestroy();
         releasePlayer();
+        mMediaSession.setActive(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mExoPlayer.release();
         mMediaSession.setActive(false);
     }
 

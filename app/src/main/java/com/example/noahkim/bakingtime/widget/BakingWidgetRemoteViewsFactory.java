@@ -76,7 +76,7 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
 
         // Set ingredients in the widget
         remoteViews.removeAllViews(R.id.widget_ingredients_list);
-        for (int i = 0; i < currentRecipe.getRecipeIngredients().size(); i++ ) {
+        for (int i = 0; i < currentRecipe.getRecipeIngredients().size(); i++) {
             RemoteViews ingRemoteViews = new RemoteViews(mContext.getPackageName(), R.layout.ingredient_item_layout);
             Ingredient currentIngredient = currentRecipe.getRecipeIngredients().get(i);
             ingRemoteViews.setTextViewText(R.id.ingredient_name, currentIngredient.getIngredientName());
@@ -86,11 +86,14 @@ public class BakingWidgetRemoteViewsFactory implements RemoteViewsFactory {
         }
 
         // Fill in the onClick PendingIntent Template using the specific name for each recipe individually
-        Intent fillInIntent = new Intent();
-        fillInIntent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);
-        remoteViews.setOnClickFillInIntent(R.id.background, fillInIntent);
+        if (position != -1) {
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);
+            remoteViews.setOnClickFillInIntent(R.id.background, fillInIntent);
+        }
         return remoteViews;
     }
+
 
     @Override
     public RemoteViews getLoadingView() {

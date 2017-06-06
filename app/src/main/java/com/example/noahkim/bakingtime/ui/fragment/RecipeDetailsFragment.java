@@ -55,9 +55,11 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
         ButterKnife.bind(this, rootView);
 
         mRecipe = null;
-        if (getActivity().getIntent().getExtras() != null) {
+        Bundle intentBundle = getActivity().getIntent().getExtras();
+        if (intentBundle != null) {
             // Retrieve data from intent
-            mRecipe = getActivity().getIntent().getExtras().getParcelable(MainActivity.RECIPE_DETAILS);
+            mRecipe = intentBundle.getParcelable(MainActivity.RECIPE_DETAILS);
+
             // set Toolbar text
             if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
                 mToolbar.setTitle(mRecipe.getRecipeName());
@@ -117,5 +119,4 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
                     .commit();
         }
     }
-
 }
