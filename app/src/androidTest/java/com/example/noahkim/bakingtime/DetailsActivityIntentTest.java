@@ -27,8 +27,8 @@ import static org.hamcrest.core.IsNot.not;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityIntentTest {
-    private final String PACKAGE_NAME = "com.example.noahkim.bakingtime.ui.RecipeDetailsActivity";
+public class DetailsActivityIntentTest {
+    private final String PACKAGE_NAME = "com.example.noahkim.bakingtime.ui.RecipeStepDetailsActivity";
 
     @Rule
     public IntentsTestRule<RecipeDetailsActivity> mActivityRule =
@@ -42,7 +42,7 @@ public class MainActivityIntentTest {
     }
 
     @Test
-    public void clickRecipeDetailsOpensStepsActivity() {
+    public void clickRecipeSteps_opensStepsActivity() {
 
         SystemClock.sleep(1000);
 
@@ -54,9 +54,7 @@ public class MainActivityIntentTest {
         // Set up result stubbing when an intent sent to "details" is seen.
         intending(toPackage(PACKAGE_NAME)).respondWith(result);
 
-        // User action that results in details activity being launched.
-        // Launching activity expects recipe name to be returned and displays it on the screen.
+        // User action that results in step details activity being launched.
         onView(withId(R.id.recyclerview_steps_list)).perform(click());
-
     }
 }

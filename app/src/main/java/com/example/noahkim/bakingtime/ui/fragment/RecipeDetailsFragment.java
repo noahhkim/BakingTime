@@ -47,7 +47,6 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     private Recipe mRecipe;
     private List<Ingredient> mIngredients = new ArrayList<>();
     public static List<Step> STEPS_LIST = new ArrayList<>();
-    private int index = 0;
 
     @Nullable
     @Override

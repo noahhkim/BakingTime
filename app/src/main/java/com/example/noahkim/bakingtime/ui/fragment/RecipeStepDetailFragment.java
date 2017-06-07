@@ -90,7 +90,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         // ExoPlayer takes up entire screen in phone landscape mode
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
-                && !getResources().getBoolean(R.bool.isTablet)) {
+                && !getResources().getBoolean(isTablet)) {
             hideSystemUI();
             mPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
             mStepDescription.setVisibility(View.GONE);
@@ -100,7 +100,6 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         return rootView;
     }
-
 
 
     private void hideSystemUI() {

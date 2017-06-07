@@ -35,9 +35,9 @@ public class MainActivityScreenTest {
         SystemClock.sleep(1000);
 
         onView(withId(R.id.recyclerview_recipes))
-                .perform(actionOnItemAtPosition(0, click()));
+                .perform(actionOnItemAtPosition(1, click()));
 
         onView(withId(R.id.toolbar))
-                .check(matches(hasDescendant(withText("Nutella Pie"))));
+                .check(matches(hasDescendant(withText("Brownies"))));
     }
 }
