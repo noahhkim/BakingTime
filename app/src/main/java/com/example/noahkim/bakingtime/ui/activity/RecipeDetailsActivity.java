@@ -1,4 +1,4 @@
-package com.example.noahkim.bakingtime.ui;
+package com.example.noahkim.bakingtime.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

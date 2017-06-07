@@ -19,9 +19,9 @@ import com.example.noahkim.bakingtime.adapters.StepsAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.model.Step;
-import com.example.noahkim.bakingtime.ui.MainActivity;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
-import com.example.noahkim.bakingtime.ui.RecipeStepDetailActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.RecipeStepDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;

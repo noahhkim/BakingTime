@@ -7,7 +7,7 @@ import android.os.SystemClock;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

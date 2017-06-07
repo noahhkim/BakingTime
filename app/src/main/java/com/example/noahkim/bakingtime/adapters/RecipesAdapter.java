@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
-import com.example.noahkim.bakingtime.ui.MainActivity;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

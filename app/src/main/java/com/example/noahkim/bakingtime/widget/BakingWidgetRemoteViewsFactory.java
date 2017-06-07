@@ -8,7 +8,7 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
-import com.example.noahkim.bakingtime.ui.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
 import com.example.noahkim.bakingtime.webservice.Api;
 
 import java.io.IOException;

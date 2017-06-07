@@ -4,7 +4,7 @@ import android.os.SystemClock;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.noahkim.bakingtime.ui.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

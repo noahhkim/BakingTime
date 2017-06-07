@@ -12,8 +12,8 @@ import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.ui.MainActivity;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
 
 /**
  * Created by Noah on 5/24/2017.
