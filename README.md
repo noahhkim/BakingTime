@@ -25,6 +25,11 @@ git clone https://github.com/noahhkim/bakingtime.git
 - Java 8
 - Latest version of Android SDK and Android Build Tools
 
-**Testing:**
+**Libraries:**
 
-This project integrates Espresso testing.
+- Espresso 2.2.2
+- Butterknife 8.5.1
+- Exoplayer
+- Retrofit 2.2
+- Picasso 2.5
+- Timber 4.5
