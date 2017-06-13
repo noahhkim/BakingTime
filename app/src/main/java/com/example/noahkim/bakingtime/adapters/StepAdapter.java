@@ -21,12 +21,12 @@ import butterknife.ButterKnife;
  * Created by Noah on 5/17/2017.
  */
 
-public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemViewHolder> {
+public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepsItemViewHolder> {
     private List<Step> mSteps;
     private ListItemClickListener mOnClickListener;
     private Context mContext;
 
-    public StepsAdapter(ListItemClickListener onClickListener, List<Step> steps) {
+    public StepAdapter(ListItemClickListener onClickListener, List<Step> steps) {
         mOnClickListener = onClickListener;
         mSteps = steps;
     }
@@ -36,13 +36,13 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsItemVie
     }
 
     @Override
-    public StepsAdapter.StepsItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StepAdapter.StepsItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.steps_item_layout, parent, false);
         return new StepsItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(StepsAdapter.StepsItemViewHolder holder, int position) {
+    public void onBindViewHolder(StepAdapter.StepsItemViewHolder holder, int position) {
         final Step currentStep = mSteps.get(position);
         holder.mStepsShortDescView.setText(currentStep.getStepShortDescription());
         if (currentStep.getThumbnailUrl().length() > 0) {

@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="horizontal"
-    tools:context="com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity">
+    tools:context="com.example.noahkim.bakingtime.ui.activity.DetailsActivity">
 
-<!-- The static RecipeDetailsFragment -->
+<!-- The static DetailsFragment -->
 <FrameLayout android:id="@+id/recipe_details_frame"
     android:layout_width="0dp"
     android:layout_height="match_parent"

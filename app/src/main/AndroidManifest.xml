@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RecipeDetailsActivity"
+            android:name=".ui.activity.DetailsActivity"
             android:label="@string/title_recipe_detail"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.activity.MainActivity"
@@ -31,12 +31,12 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.RecipeStepDetailActivity"
+            android:name=".ui.activity.StepDetailsActivity"
             android:label="@string/title_recipe_steps"
-            android:parentActivityName=".ui.activity.RecipeDetailsActivity">
+            android:parentActivityName=".ui.activity.DetailsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.RecipeDetailsActivity" />
+                android:value=".ui.activity.DetailsActivity" />
         </activity>
 
         <receiver android:name=".widget.BakingWidgetProvider">

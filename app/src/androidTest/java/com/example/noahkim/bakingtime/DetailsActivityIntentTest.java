@@ -7,7 +7,7 @@ import android.os.SystemClock;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.DetailsActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -31,8 +31,8 @@ public class DetailsActivityIntentTest {
     private final String PACKAGE_NAME = "com.example.noahkim.bakingtime.ui.RecipeStepDetailsActivity";
 
     @Rule
-    public IntentsTestRule<RecipeDetailsActivity> mActivityRule =
-            new IntentsTestRule<>(RecipeDetailsActivity.class);
+    public IntentsTestRule<DetailsActivity> mActivityRule =
+            new IntentsTestRule<>(DetailsActivity.class);
 
     @Before
     public void stubAllExternalIntents() {
@@ -48,7 +48,7 @@ public class DetailsActivityIntentTest {
 
         // Build a result to return when a particular activity is launched.
         Intent intent = new Intent();
-        intent.putExtra(RecipeDetailsActivity.STEP_DETAILS, 2);
+        intent.putExtra(DetailsActivity.STEP_DETAILS, 2);
         ActivityResult result = new ActivityResult(Activity.RESULT_OK, intent);
 
         // Set up result stubbing when an intent sent to "details" is seen.

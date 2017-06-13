@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.DetailsActivity;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -41,13 +41,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.noahkim.bakingtime.R.bool.isTablet;
-import static com.example.noahkim.bakingtime.ui.fragment.RecipeDetailsFragment.STEPS_LIST;
+import static com.example.noahkim.bakingtime.ui.fragment.DetailsFragment.STEPS_LIST;
 
 /**
  * Created by Noah on 5/17/2017.
  */
 
-public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.EventListener {
+public class StepDetailsFragment extends Fragment implements ExoPlayer.EventListener {
     @BindView(R.id.media_player_container)
     SimpleExoPlayerView mPlayerView;
     @BindView(R.id.recipe_step_description)
@@ -61,7 +61,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
     private PlaybackStateCompat.Builder mStateBuilder;
     private SimpleExoPlayer mExoPlayer;
     private String videoUrl;
-    private static final String TAG = RecipeStepDetailFragment.class.getSimpleName();
+    private static final String TAG = StepDetailsFragment.class.getSimpleName();
     protected static int step_index = 0;
 
     @Nullable
@@ -72,7 +72,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
 
         // Retrieve data from intent
         if (!getResources().getBoolean(isTablet)) {
-            step_index = getActivity().getIntent().getExtras().getInt(RecipeDetailsActivity.STEP_DETAILS);
+            step_index = getActivity().getIntent().getExtras().getInt(DetailsActivity.STEP_DETAILS);
         }
 
         // Initialize the Media Session
@@ -195,7 +195,7 @@ public class RecipeStepDetailFragment extends Fragment implements ExoPlayer.Even
             mExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
-            String userAgent = Util.getUserAgent(getContext(), "RecipeStepDetailFragment");
+            String userAgent = Util.getUserAgent(getContext(), "StepDetailsFragment");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);

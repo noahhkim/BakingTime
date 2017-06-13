@@ -19,12 +19,12 @@ import butterknife.ButterKnife;
  * Created by Noah on 5/17/2017.
  */
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsItemViewHolder> {
+public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientsItemViewHolder> {
 
     private Context mContext;
     private List<Ingredient> mIngredients;
 
-    public IngredientsAdapter(Context context, List<Ingredient> ingredients) {
+    public IngredientAdapter(Context context, List<Ingredient> ingredients) {
         mContext = context;
         mIngredients = ingredients;
     }

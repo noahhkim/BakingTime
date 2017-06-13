@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.adapters.RecipesAdapter;
+import com.example.noahkim.bakingtime.adapters.RecipeAdapter;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.webservice.Api;
 
@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RecipesFragment extends Fragment {
     @BindView(R.id.recyclerview_recipes)
     RecyclerView mRecipesRecyclerView;
-    private RecipesAdapter mRecipesAdapter;
+    private RecipeAdapter mRecipeAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<Recipe> mRecipes;
 
@@ -72,8 +72,8 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 mRecipes = response.body();
-                mRecipesAdapter = new RecipesAdapter(getContext(), mRecipes);
-                mRecipesRecyclerView.setAdapter(mRecipesAdapter);
+                mRecipeAdapter = new RecipeAdapter(getContext(), mRecipes);
+                mRecipesRecyclerView.setAdapter(mRecipeAdapter);
             }
 
             @Override

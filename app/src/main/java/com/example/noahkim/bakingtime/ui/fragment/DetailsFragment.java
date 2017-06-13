@@ -14,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.adapters.IngredientsAdapter;
-import com.example.noahkim.bakingtime.adapters.StepsAdapter;
+import com.example.noahkim.bakingtime.adapters.IngredientAdapter;
+import com.example.noahkim.bakingtime.adapters.StepAdapter;
 import com.example.noahkim.bakingtime.model.Ingredient;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.model.Step;
+import com.example.noahkim.bakingtime.ui.activity.DetailsActivity;
 import com.example.noahkim.bakingtime.ui.activity.MainActivity;
-import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
-import com.example.noahkim.bakingtime.ui.activity.RecipeStepDetailActivity;
+import com.example.noahkim.bakingtime.ui.activity.StepDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by Noah on 5/17/2017.
  */
 
-public class RecipeDetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener {
+public class DetailsFragment extends Fragment implements StepAdapter.ListItemClickListener {
     @BindView(R.id.recyclerview_ingredients_list)
     RecyclerView mIngredientsRecyclerView;
     @BindView(R.id.recyclerview_steps_list)
@@ -42,8 +42,8 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     Toolbar mToolbar;
 
     private RecyclerView.LayoutManager mLayoutManager;
-    private IngredientsAdapter mIngredientsAdapter;
-    private StepsAdapter mStepsAdapter;
+    private IngredientAdapter mIngredientAdapter;
+    private StepAdapter mStepAdapter;
     private Recipe mRecipe;
     private List<Ingredient> mIngredients = new ArrayList<>();
     public static List<Step> STEPS_LIST = new ArrayList<>();
@@ -61,7 +61,7 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
             mRecipe = intentBundle.getParcelable(MainActivity.RECIPE_DETAILS);
 
             // set Toolbar text
-            if (mToolbar != null && getActivity() instanceof RecipeDetailsActivity) {
+            if (mToolbar != null && getActivity() instanceof DetailsActivity) {
                 mToolbar.setTitle(mRecipe.getRecipeName());
             }
             // Get ingredients and steps and attach them to adapter
@@ -95,27 +95,27 @@ public class RecipeDetailsFragment extends Fragment implements StepsAdapter.List
     private void getDetails() {
         // attach ingredients adapter to recyclerview
         mIngredients = mRecipe.getRecipeIngredients();
-        mIngredientsAdapter = new IngredientsAdapter(getContext(), mIngredients);
-        mIngredientsRecyclerView.setAdapter(mIngredientsAdapter);
+        mIngredientAdapter = new IngredientAdapter(getContext(), mIngredients);
+        mIngredientsRecyclerView.setAdapter(mIngredientAdapter);
 
         // attach steps to recyclerview
         STEPS_LIST = mRecipe.getRecipeSteps();
-        mStepsAdapter = new StepsAdapter(this, STEPS_LIST);
-        mStepsRecyclerView.setAdapter(mStepsAdapter);
+        mStepAdapter = new StepAdapter(this, STEPS_LIST);
+        mStepsRecyclerView.setAdapter(mStepAdapter);
     }
 
     @Override
     public void onItemClick(int itemIndex) {
 
         if (!getResources().getBoolean(R.bool.isTablet)) {
-            Intent intent = new Intent(getActivity(), RecipeStepDetailActivity.class);
-            intent.putExtra(RecipeDetailsActivity.STEP_DETAILS, itemIndex);
+            Intent intent = new Intent(getActivity(), StepDetailsActivity.class);
+            intent.putExtra(DetailsActivity.STEP_DETAILS, itemIndex);
             startActivity(intent);
 
         } else {
-            RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
+            StepDetailsFragment stepDetailsFragment = new StepDetailsFragment();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.steps_details_frame, recipeStepDetailFragment)
+                    .replace(R.id.steps_details_frame, stepDetailsFragment)
                     .commit();
         }
     }

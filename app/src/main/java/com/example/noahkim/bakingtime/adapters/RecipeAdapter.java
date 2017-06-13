@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.noahkim.bakingtime.R;
 import com.example.noahkim.bakingtime.model.Recipe;
 import com.example.noahkim.bakingtime.ui.activity.MainActivity;
-import com.example.noahkim.bakingtime.ui.activity.RecipeDetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.DetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,15 +21,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * RecipesAdapter is backed by a list of {@link Recipe} objects which populate
+ * RecipeAdapter is backed by a list of {@link Recipe} objects which populate
  * the RecyclerView in MainActivity
  */
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeItemViewHolder> {
     private Context mContext;
     private List<Recipe> mRecipes;
 
-    public RecipesAdapter(Context context, List<Recipe> recipes) {
+    public RecipeAdapter(Context context, List<Recipe> recipes) {
         mContext = context;
         mRecipes = recipes;
     }
@@ -77,7 +77,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
         public void onClick(View view) {
             if (getAdapterPosition() != RecyclerView.NO_POSITION) {
                 Recipe currentRecipe = mRecipes.get(getAdapterPosition());
-                Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
+                Intent intent = new Intent(mContext, DetailsActivity.class);
                 intent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);
                 mContext.startActivity(intent);
             }
