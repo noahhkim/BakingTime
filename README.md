@@ -1,5 +1,4 @@
 # BakingTime
-Recipes, ingredients, instructions and videos for baking popular desserts
 
 **About:**
 
