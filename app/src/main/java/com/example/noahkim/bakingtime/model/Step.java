@@ -21,11 +21,15 @@ public class Step implements Parcelable {
     @SerializedName("videoURL")
     private String mStepVideoUrl;
 
+    @SerializedName("thumbnailURL")
+    private String mStepThumbnailUrl;
+
     protected Step(Parcel in) {
         mStepId = in.readInt();
         mStepShortDescription = in.readString();
         mStepDescription = in.readString();
         mStepVideoUrl = in.readString();
+        mStepThumbnailUrl = in.readString();
     }
 
     public static final Creator<Step> CREATOR = new Creator<Step>() {
@@ -51,6 +55,7 @@ public class Step implements Parcelable {
         parcel.writeString(mStepShortDescription);
         parcel.writeString(mStepDescription);
         parcel.writeString(mStepVideoUrl);
+        parcel.writeString(mStepThumbnailUrl);
     }
 
     public int getStepId() {
@@ -67,5 +72,9 @@ public class Step implements Parcelable {
 
     public String getStepVideoUrl() {
         return mStepVideoUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return mStepThumbnailUrl;
     }
 }

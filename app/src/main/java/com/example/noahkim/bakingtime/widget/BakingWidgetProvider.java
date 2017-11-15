@@ -2,6 +2,7 @@ package com.example.noahkim.bakingtime.widget;
 
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -11,11 +12,8 @@ import android.os.Build;
 import android.widget.RemoteViews;
 
 import com.example.noahkim.bakingtime.R;
-import com.example.noahkim.bakingtime.model.Recipe;
-import com.example.noahkim.bakingtime.ui.MainActivity;
-import com.example.noahkim.bakingtime.ui.RecipeDetailsActivity;
-
-import java.util.List;
+import com.example.noahkim.bakingtime.ui.activity.DetailsActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
 
 /**
  * Created by Noah on 5/24/2017.
@@ -38,9 +36,11 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         Intent recipeIntent = new Intent(context, BakingWidgetRemoteViewsService.class);
         views.setRemoteAdapter(R.id.widget_recipe_list, recipeIntent);
 
-        // Set the RecipeDetailsActivity to launch when clicked
-        Intent appIntent = new Intent(context, RecipeDetailsActivity.class);
-        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Set the DetailsActivity to launch when clicked
+        Intent appIntent = new Intent(context, DetailsActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(appIntent);
+        PendingIntent appPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_recipe_list, appPendingIntent);
 
         // Instruct the widget manager to update the widget

@@ -1,26 +1,22 @@
 package com.example.noahkim.bakingtime;
 
-import android.app.Activity;
-import android.app.Instrumentation.ActivityResult;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
+import android.os.SystemClock;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.noahkim.bakingtime.ui.MainActivity;
+import com.example.noahkim.bakingtime.ui.activity.MainActivity;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.Intents.intending;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.not;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 
 /**
@@ -31,21 +27,17 @@ import static org.hamcrest.Matchers.not;
 public class MainActivityScreenTest {
 
     @Rule
-    public IntentsTestRule<MainActivity> mActivityTestRule = new IntentsTestRule<>(MainActivity.class);
-
-    @Before
-    public void stubAllExternalIntents() {
-        // By default Espresso Intents does not stub any Intents. Stubbing needs to be setup before
-        // every test run. In this case all external Intents will be blocked.
-        intending(not(isInternal())).respondWith(new ActivityResult(Activity.RESULT_OK, null));
-    }
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void MainActivityTest() {
-        onData(withId(R.id.card_view)).perform(click());
-        // intended(Matcher<Intent> matcher) asserts the given matcher matches one and only one
-        // intent sent by the application.
-        intended(allOf(
-                hasExtra(MainActivity.RECIPE_DETAILS, 2)));
+
+        SystemClock.sleep(1000);
+
+        onView(withId(R.id.recyclerview_recipes))
+                .perform(actionOnItemAtPosition(1, click()));
+
+        onView(withId(R.id.toolbar))
+                .check(matches(hasDescendant(withText("Brownies"))));
     }
 }
