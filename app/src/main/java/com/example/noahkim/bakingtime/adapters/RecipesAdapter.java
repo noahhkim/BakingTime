@@ -21,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static android.support.v7.recyclerview.R.styleable.RecyclerView;
+
 /**
  * RecipesAdapter is backed by a list of {@link Recipe} objects which populate
  * the RecyclerView in MainActivity
@@ -29,6 +31,7 @@ import timber.log.Timber;
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeItemViewHolder> {
     private Context mContext;
     private List<Recipe> mRecipes;
+    public static final int NO_POSITION = 0;
 
     public RecipesAdapter(Context context, List<Recipe> recipes) {
         mContext = context;
@@ -76,7 +79,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipeIt
 
         @Override
         public void onClick(View view) {
-            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+            if (getAdapterPosition() != NO_POSITION) {
                 Recipe currentRecipe = mRecipes.get(getAdapterPosition());
                 Intent intent = new Intent(mContext, RecipeDetailsActivity.class);
                 intent.putExtra(MainActivity.RECIPE_DETAILS, currentRecipe);

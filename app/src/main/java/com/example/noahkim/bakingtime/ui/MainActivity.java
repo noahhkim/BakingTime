@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Set up timber
             Timber.plant(new Timber.DebugTree());
+            
         }
     }
 }
